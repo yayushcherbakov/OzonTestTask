@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+    <PropertyGroup>
+        <TargetFramework>net7.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Grpc.AspNetCore" Version="2.63.0" />
+        <PackageReference Include="Grpc.AspNetCore.Server.Reflection" Version="2.63.0" />
+        <PackageReference Include="Grpc.Core" Version="2.46.6" />
+        <PackageReference Include="Grpc.Tools" Version="2.64.0">
+          <PrivateAssets>all</PrivateAssets>
+          <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\RequestProcessingService.BusinessLogic\RequestProcessingService.BusinessLogic.csproj" />
+    </ItemGroup>
+
+</Project>
