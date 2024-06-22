@@ -8,7 +8,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
+        <Protobuf Include="Protos\ReportRequestsService.proto" GrpcServices="Server" />
     </ItemGroup>
 
     <ItemGroup>
@@ -23,6 +23,11 @@
 
     <ItemGroup>
       <ProjectReference Include="..\RequestProcessingService.BusinessLogic\RequestProcessingService.BusinessLogic.csproj" />
+      <ProjectReference Include="..\RequestProcessingService.Infrastructure\RequestProcessingService.Infrastructure.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="obj\Debug\net7.0\Protos" />
     </ItemGroup>
 
 </Project>

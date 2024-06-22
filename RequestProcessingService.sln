@@ -6,6 +6,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestProcessingService.Da
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestProcessingService.BusinessLogic", "RequestProcessingService.BusinessLogic\RequestProcessingService.BusinessLogic.csproj", "{D91191B8-ED01-4E9E-9EB3-0FA6392E82D3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestProcessingService.Infrastructure", "RequestProcessingService.Infrastructure\RequestProcessingService.Infrastructure.csproj", "{482F72BB-4D47-4650-A87D-C67091BFB2D4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportRequestEventGenerator", "ReportRequestEventGenerator\ReportRequestEventGenerator.csproj", "{C2BC10A8-AD0E-4CBC-A7C4-B1177902E34C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +28,13 @@ Global
 		{D91191B8-ED01-4E9E-9EB3-0FA6392E82D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D91191B8-ED01-4E9E-9EB3-0FA6392E82D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D91191B8-ED01-4E9E-9EB3-0FA6392E82D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{482F72BB-4D47-4650-A87D-C67091BFB2D4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{482F72BB-4D47-4650-A87D-C67091BFB2D4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{482F72BB-4D47-4650-A87D-C67091BFB2D4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{482F72BB-4D47-4650-A87D-C67091BFB2D4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2BC10A8-AD0E-4CBC-A7C4-B1177902E34C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2BC10A8-AD0E-4CBC-A7C4-B1177902E34C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2BC10A8-AD0E-4CBC-A7C4-B1177902E34C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2BC10A8-AD0E-4CBC-A7C4-B1177902E34C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

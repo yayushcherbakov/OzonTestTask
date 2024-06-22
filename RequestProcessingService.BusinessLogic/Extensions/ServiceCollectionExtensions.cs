@@ -8,6 +8,6 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection AddBusinessLogicServices(this IServiceCollection services)
     {
-        return services.AddScoped<IReportsService, ReportsService>();
+        return services.AddTransient<IReportRequestsService, ReportRequestsService>();
     }
 }
