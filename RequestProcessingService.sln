@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestProcessingService.Un
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestProcessingService.Access", "RequestProcessingService.Access\RequestProcessingService.Access.csproj", "{30D24F65-9E27-4751-B84A-4011018E7289}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestProcessingService.Scheduler", "RequestProcessingService.Scheduler\RequestProcessingService.Scheduler.csproj", "{2CA712A5-1845-4975-8F40-6A661BB6C7C5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -48,5 +50,9 @@ Global
 		{30D24F65-9E27-4751-B84A-4011018E7289}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{30D24F65-9E27-4751-B84A-4011018E7289}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{30D24F65-9E27-4751-B84A-4011018E7289}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CA712A5-1845-4975-8F40-6A661BB6C7C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CA712A5-1845-4975-8F40-6A661BB6C7C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CA712A5-1845-4975-8F40-6A661BB6C7C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CA712A5-1845-4975-8F40-6A661BB6C7C5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

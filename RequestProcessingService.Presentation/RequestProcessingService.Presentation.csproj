@@ -4,7 +4,7 @@
         <TargetFramework>net7.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <DockerDefaultTargetOS>Windows</DockerDefaultTargetOS>
+        <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
     </PropertyGroup>
 
     <ItemGroup>
@@ -24,6 +24,7 @@
     <ItemGroup>
       <ProjectReference Include="..\RequestProcessingService.BusinessLogic\RequestProcessingService.BusinessLogic.csproj" />
       <ProjectReference Include="..\RequestProcessingService.Infrastructure\RequestProcessingService.Infrastructure.csproj" />
+      <ProjectReference Include="..\RequestProcessingService.Scheduler\RequestProcessingService.Scheduler.csproj" />
     </ItemGroup>
 
     <ItemGroup>
