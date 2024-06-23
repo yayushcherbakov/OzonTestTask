@@ -10,6 +10,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestProcessingService.In
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportRequestEventGenerator", "ReportRequestEventGenerator\ReportRequestEventGenerator.csproj", "{C2BC10A8-AD0E-4CBC-A7C4-B1177902E34C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestProcessingService.UnitTests", "RequestProcessingService.UnitTests\RequestProcessingService.UnitTests.csproj", "{C0D91EA5-BD3A-4C89-89B5-055917666D7F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RequestProcessingService.Access", "RequestProcessingService.Access\RequestProcessingService.Access.csproj", "{30D24F65-9E27-4751-B84A-4011018E7289}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,5 +40,13 @@ Global
 		{C2BC10A8-AD0E-4CBC-A7C4-B1177902E34C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C2BC10A8-AD0E-4CBC-A7C4-B1177902E34C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C2BC10A8-AD0E-4CBC-A7C4-B1177902E34C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C0D91EA5-BD3A-4C89-89B5-055917666D7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C0D91EA5-BD3A-4C89-89B5-055917666D7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C0D91EA5-BD3A-4C89-89B5-055917666D7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C0D91EA5-BD3A-4C89-89B5-055917666D7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30D24F65-9E27-4751-B84A-4011018E7289}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30D24F65-9E27-4751-B84A-4011018E7289}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30D24F65-9E27-4751-B84A-4011018E7289}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30D24F65-9E27-4751-B84A-4011018E7289}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

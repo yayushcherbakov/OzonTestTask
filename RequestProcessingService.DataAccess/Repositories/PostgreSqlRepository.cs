@@ -5,7 +5,7 @@ using RequestProcessingService.DataAccess.Repositories.Interfaces;
 
 namespace RequestProcessingService.DataAccess.Repositories;
 
-internal abstract class PostgreSqlRepository : IPostgreSqlRepository
+public abstract class PostgreSqlRepository : IPostgreSqlRepository
 {
     private readonly DataAccessOptions _dataAccessSettings;
 

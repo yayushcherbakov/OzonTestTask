@@ -3,7 +3,7 @@ using FluentMigrator;
 
 namespace Ozon.Route256.Postgres.Persistence.Migrations;
 
-[Migration(20231104163700, TransactionBehavior.None)]
+[Migration(20242305223700, TransactionBehavior.None)]
 public sealed class InitSchema : Migration
 {
     public override void Up()

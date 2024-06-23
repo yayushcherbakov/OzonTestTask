@@ -1,10 +1,13 @@
 syntax = "proto3";
 
+import "google/protobuf/empty.proto";
+
 package ReportRequestsGrpc;
 
 service ReportRequestsService
 {
   rpc GetReportResult (GetReportResultRequest) returns (GetReportResultResponse);
+  rpc ProcessReportRequests  (google.protobuf.Empty) returns (google.protobuf.Empty);
 }
 
 message GetReportResultRequest {

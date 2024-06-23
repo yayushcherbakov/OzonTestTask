@@ -32,7 +32,7 @@ public class ErrorHandlerInterceptor : Interceptor
                 LoggerMessagesConstants.NotFoundExceptions
             );
 
-            throw new NotFoundException(LoggerMessagesConstants.NotFoundExceptions);
+            throw new RpcException(new Status(StatusCode.NotFound, ex.Message));
         }
         catch (Exception ex)
         {

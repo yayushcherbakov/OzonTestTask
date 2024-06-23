@@ -5,6 +5,7 @@ using Npgsql;
 using Npgsql.NameTranslation;
 using RequestProcessingService.DataAccess.Configurations;
 using RequestProcessingService.DataAccess.Entities;
+using RequestProcessingService.DataAccess.Models;
 
 namespace RequestProcessingService.DataAccess.Infrastructure;
 
@@ -22,6 +23,7 @@ public static class Postgres
         var mapper = NpgsqlConnection.GlobalTypeMapper;
 
         mapper.MapComposite<ReportRequestEntityV1>("report_request_v1", Translator);
+        mapper.MapComposite<ReportResultV1>("report_result_v1", Translator);
     }
 
     /// <summary>

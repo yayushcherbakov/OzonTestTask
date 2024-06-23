@@ -1,7 +1,9 @@
 using FluentMigrator.Runner;
+using RequestProcessingService.Access.Extensions;
 using RequestProcessingService.BusinessLogic.Extensions;
 using RequestProcessingService.DataAccess.Extensions;
 using RequestProcessingService.Infrastructure.Extensions;
+using RequestProcessingService.Presentation.Interceptors;
 using RequestProcessingService.Presentation.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,9 +13,12 @@ builder.Services.AddGrpcReflection();
 
 builder.Services.AddBusinessLogicServices();
 builder.Services.AddDataAccess(builder.Configuration);
+builder.Services.AddAccessServices();
 
 builder.Services.AddReportRequestEventHandler(builder.Configuration);
 builder.Services.AddLogging();
+
+builder.Services.AddGrpc(options => { options.Interceptors.Add<ErrorHandlerInterceptor>(); });
 
 var app = builder.Build();
 

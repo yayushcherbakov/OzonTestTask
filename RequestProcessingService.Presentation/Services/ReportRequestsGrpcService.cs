@@ -1,3 +1,4 @@
+using Google.Protobuf.WellKnownTypes;
 using Grpc.Core;
 using ReportRequestsGrpc;
 using RequestProcessingService.BusinessLogic.Services.Interfaces;
@@ -40,5 +41,16 @@ public class ReportRequestsGrpcService : ReportRequestsService.ReportRequestsSer
         };
 
         return response;
+    }
+
+    public override async Task<Empty> ProcessReportRequests
+    (
+        Empty request,
+        ServerCallContext context
+    )
+    {
+        await _reportRequestsService.ProcessReportRequests(context.CancellationToken);
+
+        return new Empty();
     }
 }

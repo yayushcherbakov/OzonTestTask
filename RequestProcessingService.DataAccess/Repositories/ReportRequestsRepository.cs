@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Options;
 using RequestProcessingService.DataAccess.Configurations;
 using RequestProcessingService.DataAccess.Entities;
+using RequestProcessingService.DataAccess.Models;
 using RequestProcessingService.DataAccess.Repositories.Interfaces;
 
 namespace RequestProcessingService.DataAccess.Repositories;
@@ -76,20 +77,20 @@ select request_id
             cancellationToken: token);
 
         await using var connection = await GetConnection();
-        return (await connection.QueryAsync<ReportRequestEntityV1>(cmd))
-            .ToArray();
+
+        return (await connection.QueryAsync<ReportRequestEntityV1>(cmd)).ToArray();
     }
 
-    public async Task UpdateReportRequestResults(ReportRequestEntityV1[] reportRequests, CancellationToken token)
+    public async Task UpdateReportRequestResults(ReportResultV1[] reportResults, CancellationToken token)
     {
         const string sqlQuery = @"
 update report_requests rr
-   set is_completed = nrr.is_completed
+   set is_completed = true
      , racio = nrr.racio
      , payment_count = nrr.payment_count
-  from UNNEST(@ReportRequests) nrr
+  from UNNEST(@ReportResults) nrr
  where nrr.request_id = rr.request_id
-   and rr.is_completed = 0
+   and rr.is_completed = false
 ";
 
         await using var connection = await GetConnection();
@@ -98,8 +99,34 @@ update report_requests rr
                 sqlQuery,
                 new
                 {
-                    ReportRequests = reportRequests
+                    ReportResults = reportResults
                 },
                 cancellationToken: token));
+    }
+
+    public async Task<ReportRequestEntityV1[]> GetIncompleteReportRequests(CancellationToken token)
+    {
+        var baseSql = @"
+select request_id
+     , is_completed
+     , product_id
+     , check_period_from
+     , check_period_to
+     , racio
+     , payment_count
+ from report_requests
+where is_completed = false
+";
+        var @params = new DynamicParameters();
+
+        var cmd = new CommandDefinition(
+            baseSql,
+            @params,
+            commandTimeout: DefaultTimeoutInSeconds,
+            cancellationToken: token);
+
+        await using var connection = await GetConnection();
+
+        return (await connection.QueryAsync<ReportRequestEntityV1>(cmd)).ToArray();
     }
 }

@@ -6,5 +6,7 @@ public interface IReportRequestsService
 {
     Task<ReportResult> GetReportResult(long requestId, CancellationToken cancellationToken);
 
-    public Task CreateReportRequests(CreateReportRequestModel[] requests, CancellationToken cancellationToken);
+    Task CreateReportRequests(CreateReportRequestModel[] requests, CancellationToken cancellationToken);
+
+    Task ProcessReportRequests(CancellationToken cancellationToken);
 }

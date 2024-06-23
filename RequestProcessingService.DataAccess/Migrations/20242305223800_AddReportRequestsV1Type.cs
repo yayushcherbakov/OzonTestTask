@@ -2,7 +2,7 @@
 
 namespace Route256.Week5.Workshop.PriceCalculator.Dal.Migrations;
 
-[Migration(20231104163800, TransactionBehavior.None)]
+[Migration(20242305223800, TransactionBehavior.None)]
 public class AddReportRequestsV1Type: Migration
 {
     public override void Up()

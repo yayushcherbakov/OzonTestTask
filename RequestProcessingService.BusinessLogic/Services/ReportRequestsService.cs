@@ -1,4 +1,7 @@
-﻿using RequestProcessingService.BusinessLogic.Constants;
+﻿using RequestProcessingService.Access.Models;
+using RequestProcessingService.Access.Services.Interfaces;
+using RequestProcessingService.BusinessLogic.Constants;
+using RequestProcessingService.BusinessLogic.Exceptions;
 using RequestProcessingService.BusinessLogic.Models;
 using RequestProcessingService.BusinessLogic.Services.Interfaces;
 using RequestProcessingService.DataAccess.Entities;
@@ -11,16 +14,18 @@ internal class ReportRequestsService : IReportRequestsService
 {
     private readonly IReportRequestsRepository _reportRequestsRepository;
     private readonly ICachedReportResultsRepository _cachedReportResultsRepository;
-
+    private readonly IReportsAccessService _reportsAccessService;
 
     public ReportRequestsService
     (
         IReportRequestsRepository reportRequestsRepository,
-        ICachedReportResultsRepository cachedReportResultsRepository
+        ICachedReportResultsRepository cachedReportResultsRepository,
+        IReportsAccessService reportsAccessService
     )
     {
         _reportRequestsRepository = reportRequestsRepository;
         _cachedReportResultsRepository = cachedReportResultsRepository;
+        _reportsAccessService = reportsAccessService;
     }
 
     public async Task<ReportResult> GetReportResult(long requestId, CancellationToken cancellationToken)
@@ -51,7 +56,7 @@ internal class ReportRequestsService : IReportRequestsService
 
         if (reportRequestEntity is null)
         {
-            throw new ApplicationException(ErrorMessages.ReportRequestNotFound);
+            throw new NotFoundException(ErrorMessages.ReportRequestNotFound);
         }
 
         await _cachedReportResultsRepository.Add
@@ -77,6 +82,38 @@ internal class ReportRequestsService : IReportRequestsService
                 )
                 : null
         );
+    }
+
+    public async Task ProcessReportRequests(CancellationToken cancellationToken)
+    {
+        var incompleteReportRequests = await _reportRequestsRepository.GetIncompleteReportRequests(cancellationToken);
+
+        var reportRequests = incompleteReportRequests
+            .Select(x =>
+                new ReportRequestPayload
+                (
+                    x.RequestId,
+                    x.ProductId,
+                    x.CheckPeriodFrom,
+                    x.CheckPeriodTo
+                )
+            )
+            .ToArray();
+
+        var reports = await _reportsAccessService.GetReports(reportRequests, cancellationToken);
+
+        var reportRequestEntitiesV1 = reports
+            .Select(x =>
+                new ReportResultV1
+                (
+                    x.RequestId,
+                    x.Racio,
+                    x.PaymentCount
+                )
+            )
+            .ToArray();
+
+        await _reportRequestsRepository.UpdateReportRequestResults(reportRequestEntitiesV1, cancellationToken);
     }
 
     public async Task CreateReportRequests(CreateReportRequestModel[] requests, CancellationToken cancellationToken)
