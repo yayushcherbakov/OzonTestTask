@@ -6,7 +6,7 @@ using RequestProcessingService.DataAccess.Repositories.Interfaces;
 
 namespace RequestProcessingService.DataAccess.Repositories;
 
-internal class ReportRequestsRepository : PgRepository, IReportRequestsRepository
+internal sealed class ReportRequestsRepository : PostgreSqlRepository, IReportRequestsRepository
 {
     public ReportRequestsRepository(IOptions<DataAccessOptions> dataAccessSettings) : base(dataAccessSettings.Value)
     {
@@ -34,7 +34,7 @@ returning request_id;
 ";
 
         await using var connection = await GetConnection();
-        
+
         var ids = await connection.QueryAsync<long>(
             new CommandDefinition(
                 sqlQuery,
@@ -91,7 +91,7 @@ update report_requests rr
  where nrr.request_id = rr.request_id
    and rr.is_completed = 0
 ";
-        
+
         await using var connection = await GetConnection();
         await connection.ExecuteAsync(
             new CommandDefinition(

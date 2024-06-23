@@ -1,5 +1,5 @@
 namespace RequestProcessingService.DataAccess.Repositories.Interfaces;
 
-public interface IPgRepository
+public interface IPostgreSqlRepository
 {
 }

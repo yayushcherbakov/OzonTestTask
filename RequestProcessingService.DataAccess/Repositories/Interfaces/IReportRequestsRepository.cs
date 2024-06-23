@@ -2,7 +2,7 @@
 
 namespace RequestProcessingService.DataAccess.Repositories.Interfaces;
 
-public interface IReportRequestsRepository
+public interface IReportRequestsRepository : IPostgreSqlRepository
 {
     public Task<long[]> Add(ReportRequestEntityV1[] reportRequests, CancellationToken token);
 

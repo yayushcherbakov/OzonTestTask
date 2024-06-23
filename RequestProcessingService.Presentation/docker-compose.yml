@@ -13,6 +13,15 @@ services:
       - databasedata:/var/lib/postgresql/data
     command: -c log_statement=all
   
+  redis:
+    image: redis
+    restart: always
+    container_name: local-redis
+    ports:
+      - 16379:6379
+    volumes:
+      - redisdata:/data
+
   kafka:
     image: wurstmeister/kafka:latest
     depends_on:

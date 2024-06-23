@@ -5,13 +5,13 @@ using RequestProcessingService.DataAccess.Repositories.Interfaces;
 
 namespace RequestProcessingService.DataAccess.Repositories;
 
-public abstract class PgRepository : IPgRepository
+internal abstract class PostgreSqlRepository : IPostgreSqlRepository
 {
     private readonly DataAccessOptions _dataAccessSettings;
 
     protected const int DefaultTimeoutInSeconds = 5;
 
-    protected PgRepository(DataAccessOptions dataAccessSettings)
+    protected PostgreSqlRepository(DataAccessOptions dataAccessSettings)
     {
         _dataAccessSettings = dataAccessSettings;
     }

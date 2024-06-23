@@ -11,17 +11,16 @@ public static class ServiceCollectionExtensions
     public static IServiceCollection AddDataAccess
     (
         this IServiceCollection services,
-        IConfiguration config)
+        IConfiguration config
+    )
     {
-        //read config
         services.Configure<DataAccessOptions>(config.GetSection(nameof(DataAccessOptions)));
-
-        //configure postrges types
+        
         Infrastructure.Postgres.MapCompositeTypes();
-
-        //add migrations
         Infrastructure.Postgres.AddMigrations(services);
 
-        return services.AddTransient<IReportRequestsRepository, ReportRequestsRepository>();
+        return services
+            .AddTransient<IReportRequestsRepository, ReportRequestsRepository>()
+            .AddTransient<ICachedReportResultsRepository, CachedReportResultsRepository>();
     }
 }
