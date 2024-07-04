@@ -4,7 +4,8 @@ namespace RequestProcessingService.Infrastructure.Extensions;
 
 public static class AsyncEnumerableExtensions
 {
-    public static IAsyncEnumerable<IReadOnlyList<T>> Buffer<T>(this IAsyncEnumerable<T> source, int count, TimeSpan delay = default)
+    public static IAsyncEnumerable<IReadOnlyList<T>> Buffer<T>(this IAsyncEnumerable<T> source, int count,
+        TimeSpan delay = default)
     {
         if (source is null)
             throw new ArgumentNullException(nameof(source));
@@ -16,7 +17,8 @@ public static class AsyncEnumerableExtensions
 
         async IAsyncEnumerator<IReadOnlyList<T>> BufferCore(CancellationToken cancellationToken)
         {
-            var cancellationSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, token2: default);
+            var cancellationSource =
+                CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, token2: default);
             var enumerator = source
                 .WithCancellation(cancellationSource.Token)
                 .ConfigureAwait(false)
@@ -31,14 +33,36 @@ public static class AsyncEnumerableExtensions
                 {
                     var task = enumerator.MoveNextAsync();
                     var awaiter = task.GetAwaiter();
-                    if (awaiter.IsCompleted)
-                        goto GetResult;
 
-                    if (delay > TimeSpan.Zero)
+                    var isDelayGreaterZero = delay > TimeSpan.Zero;
+                    var isCompleted = awaiter.IsCompleted;
+
+                    if (isCompleted || isDelayGreaterZero)
                     {
-                        await Task.Delay(delay, cancellationToken);
-                        if (awaiter.IsCompleted)
-                            goto GetResult;
+                        if (!isCompleted)
+                        {
+                            await Task.Delay(delay, cancellationToken);
+                        }
+
+                        if (awaiter.GetResult())
+                        {
+                            buffer.Add(enumerator.Current);
+
+                            if (buffer.Count < count)
+                                continue;
+
+                            yield return buffer.ToArray();
+                            buffer.Clear();
+                        }
+                        else
+                        {
+                            if (buffer.Count > 0)
+                                yield return buffer;
+
+                            yield break;
+                        }
+
+                        continue;
                     }
 
                     if (buffer.Count > 0)
@@ -55,26 +79,6 @@ public static class AsyncEnumerableExtensions
                         buffer.Add(enumerator.Current);
                     else
                         yield break;
-                    continue;
-
-                    GetResult:
-                    if (awaiter.GetResult())
-                    {
-                        buffer.Add(enumerator.Current);
-
-                        if (buffer.Count < count)
-                            continue;
-
-                        yield return buffer.ToArray();
-                        buffer.Clear();
-                    }
-                    else
-                    {
-                        if (buffer.Count > 0)
-                            yield return buffer;
-
-                        yield break;
-                    }
                 }
             }
             finally
